@@ -4,8 +4,8 @@ import { Card, Button, Form } from 'react-bulma-components';
 
 const Counter = () => {
 
-    let [counterState, setCounterState] = useState("0");
-    let [optionState, setOptionState] = useState(0);
+    const [counterState, setCounterState] = useState(0);
+    const [optionState, setOptionState] = useState(0);
 
     const handleIncrement = (e) => {
         e.preventDefault();
@@ -16,7 +16,7 @@ const Counter = () => {
         setCounterState(counterState - optionState);
     }
     const handleInputChange = (e) =>{
-        setOptionState(e.target.value)
+        setOptionState(parseInt(e.target.value))
 
     }
     return (
