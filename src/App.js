@@ -1,5 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
+import 'bulma/css/bulma.min.css';
 import Counter from './components/Counter'
 
 function App() {

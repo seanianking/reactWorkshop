@@ -1,28 +1,36 @@
 import React, { useState } from 'react'
-import { Card } from 'react-bulma-components';
-import { Button } from "react-bulma-components";
+import { Card, Button, Form } from 'react-bulma-components';
 
 
 const Counter = () => {
 
-    const [counterState, setCounterState] = useState(0);
+    let [counterState, setCounterState] = useState("0");
+    let [optionState, setOptionState] = useState(0);
 
-     const handleIncrement = (e) => {
-         e.preventDefault();
-        setCounterState(counterState + 1);
-    }
-     const handleDecrement = (e) => { 
+    const handleIncrement = (e) => {
         e.preventDefault();
-        setCounterState(counterState - 1);
+        setCounterState(counterState + optionState);
+    }
+    const handleDecrement = (e) => {
+        e.preventDefault();
+        setCounterState(counterState - optionState);
+    }
+    const handleInputChange = (e) =>{
+        setOptionState(e.target.value)
+
     }
     return (
         <div>
             <Card>
+                <br />
+                <Form.Label>Put a number here to change the increment/decrement amount:</Form.Label>
+                <br />
+                <Form.Input onChange={handleInputChange} />
                 <h6>Count: {counterState}</h6>
+                <Button onClick={handleIncrement} color="success" size="large" rounded outlined>Increment Me!</Button>
+                <Button onClick={handleDecrement} color="danger" size="large" rounded outlined>Decrement Me!</Button>
+                <br/>
             </Card>
-            <Button onClick={handleIncrement} color="successx" size="large" rounded outlined>Increment Me!</Button>
-            <Button onClick={handleDecrement} color="danger" size="large" rounded outlined>Decrement Me!</Button>
-
         </div>
     )
 }
