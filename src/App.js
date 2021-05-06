@@ -1,11 +1,19 @@
 import './App.css';
 import 'bulma/css/bulma.min.css';
-import Counter from './components/Counter'
+import Counter from './components/Counter';
+import { Columns } from 'react-bulma-components';
 
 function App() {
   return (
     <div className="App">
-      <Counter/>
+      <Columns>
+        <Columns.Column>
+          <Counter />
+        </Columns.Column>
+        <Columns.Column>
+        
+        </Columns.Column>
+      </Columns>
     </div>
   );
 }
