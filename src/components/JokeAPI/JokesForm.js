@@ -1,19 +1,49 @@
-import React from 'react'
-import { Form } from 'react-bulma-components'
+import React, { useState, useEffect } from 'react';
+import { Form, Button } from 'react-bulma-components';
+import API from './utils/API';
 
 const JokesForm = () => {
-    return (
-        <div>
+    const [search, setSearch] = useState("Wikipedia");
+    const [error, setError] = useState('');
+    const [results, setResults] = useState('');
 
+    useEffect(() => {
+        if (!search) {
+            return;
+        }
+
+        API.searchTerms(search)
+            .then(res => {
+                if (res.data.length === 0) {
+                    throw new Error("No results found.");
+                }
+                if (res.data.status === "error") {
+                    throw new Error(res.data.message);
+                }
+            })
+            .catch(err => setError(err));
+    }, []);
+
+    const handleSearchTerm = event => {
+        setSearch(event.target.value);
+        
+    };
+    return (
+        <form>
             <Form.Field>
                 <Form.Label>
-                    I'm the label of this field
+                    Search for a Joke here!
                 </Form.Label>
                 <Form.Control>
-                    <Form.Input placeholder="Inside a field set" />
+                    <Form.Input onChange={handleSearchTerm} placeholder="Pick a joke subject" />
                 </Form.Control>
             </Form.Field>
-        </div>
+            <Form.Field>
+                <Form.Control>
+                    <Button type='submit' color="link">Submit</Button>
+                </Form.Control>
+            </Form.Field>
+        </form>
     )
 }
 
